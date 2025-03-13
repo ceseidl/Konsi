@@ -1,0 +1,30 @@
+﻿@page
+@model SearchModel
+@{
+    ViewData["Title"] = "Consulta de Benefícios";
+}
+
+<h1>Consulta de Benefícios</h1>
+
+<form method="get">
+    <label for="cpf">Digite o CPF:</label>
+    <input type="text" id="cpf" name="cpf" value="@Model.Cpf" />
+    <button type="submit">Buscar</button>
+</form>
+
+@if (Model.Beneficios != null && Model.Beneficios.Any())
+{
+    <h2>Resultados:</h2>
+    <ul>
+        @foreach (var beneficio in Model.Beneficios)
+        {
+            <li>
+                Matrícula: @beneficio.Number - Tipo: @beneficio.Type
+            </li>
+        }
+    </ul>
+}
+else if (!string.IsNullOrEmpty(Model.Cpf))
+{
+    <p>Nenhum benefício encontrado para o CPF informado.</p>
+}
